@@ -1,0 +1,55 @@
+defaultTasks 'clean', 'test', 'aggregate'
+repositories{
+    mavenLocal()
+    jcenter()
+
+}
+
+buildscript{
+    repositories{
+        mavenLocal()
+        jcenter()
+    }
+    dependencies{
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.0.52")
+    }
+}
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+ext{
+    serenityVersion = '2.0.30'
+    serenityCucumberVersion = '1.9.8'
+}
+
+dependencies {
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.assertj:assertj-core:1.7.0'
+    testCompile 'org.slf4j:slf4j-simple:1.7.7'
+
+    testImplementation "net.serenity-bdd:serenity-core:$rootProject.ext.serenityVersion"
+    testImplementation "net.serenity-bdd:serenity-junit:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-screenplay:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-screenplay-webdriver:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-cucumber:$rootProject.ext.serenityCucumberVersion"
+    implementation "net.serenity-bdd:serenity-screenplay-rest:$rootProject.ext.serenityVersion"
+    compile group: 'commons-io', name: 'commons-io', version: '2.4'
+    compile group: 'jcifs', name: 'jcifs', version: '1.3.17'
+    compile "org.codehaus.jackson:jackson-mapper-asl:1.9.10"
+    compile "org.apache.commons:commons-csv:1.4"
+    compile "org.apache.poi:poi:3.10-FINAL"
+    compile "org.apache.poi:poi-ooxml:3.10-FINAL"
+    compile 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.7.1'
+    compile 'com.microsoft.sqlserver:mssql-jdbc:6.1.0.jre8'
+    compile group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.16'
+    compile 'junit:junit:4.13.1'
+}
+
+
+gradle.startParameter.continueOnFailure = true
